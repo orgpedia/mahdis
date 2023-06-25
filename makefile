@@ -65,6 +65,7 @@ $(tasks):
 	poetry run make -C $@
 
 trans-install: import/models/ai4bharat/IndicTrans2-en/ct2_int8_model
+	poetry lock
 	poetry install --only=translate
 
 
