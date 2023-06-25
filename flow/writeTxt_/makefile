@@ -1,0 +1,34 @@
+# introduced in make3.81
+ROOT_DIR := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
+ROOT_DIR := $(strip $(ROOT_DIR))
+
+export GOOGLE_APPLICATION_CREDENTIALS = $(ROOT_DIR)/../../.secrets/google.token
+export PYTHONPATH := $(ROOT_DIR)/../src:$(PYTHONPATH)
+
+RAW_FILES := $(wildcard output/*.ocr.json) $(wildcard conf/doc_translations*.json)
+GZ_FILES := $(wildcard output/*.ocr.json.gz) $(wildcard conf/doc_translations*.json.gz)
+
+TO_COMPRESS_FILES := $(addsuffix .gz, $(RAW_FILES))
+TO_UNCOMPRESS_FILES := $(basename $(GZ_FILES))
+
+.PHONY: all compress uncompress
+
+all: uncompress
+	poetry run python src/writeTxt.py input output > logs/info.log
+
+
+uncompress: $(TO_UNCOMPRESS_FILES)
+output/%.ocr.json:
+	gunzip $@.gz
+conf/%.json:
+	gunzip $@.gz
+
+
+compress: $(TO_COMPRESS_FILES)
+output/%.ocr.json.gz: output/%.ocr.json
+	gzip $?
+conf/%.json.gz: conf/%.json
+	gzip $?
+
+%:
+	poetry run python src/writeTxt.py input/mahdis-$@.pdf output/mahdis-$@.pdf.doc.json
