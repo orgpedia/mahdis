@@ -74,7 +74,11 @@ $(sub_tasks):
 	poetry run make -C $@
 
 trans-export: 
+<<<<<<< before updating
 	poetry run make -C flow/subFlows/translate_ compress
+=======
+	poetry run make -C flow/subFlows/translate_/ compress
+>>>>>>> after updating
 
 
 check:
