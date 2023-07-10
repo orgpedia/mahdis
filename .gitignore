@@ -163,7 +163,10 @@ model
 !/flow/writeTxt_/output/*.ocr.json.gz
 !/flow/writeTxt_/output/*.en.txt
 !/flow/writeTxt_/output/*.mr.txt
-!/flow/writeTxt_/output/doc_translations_todo.json.gz
+!/flow/writeTxt_/output/doc_translations_todo.json
+
+# Don't store poetry.lock for new
+poetry.lock
 
 
 # Don't upload any log files, but add log directory

@@ -14,7 +14,10 @@ org_code = "mahdis"
 
 
 def make_url(url_stub):
-    return f"{BaseURL}/{url_stub[3:]}"
+    if url_stub.startswith(BaseURL):
+        return url_stub
+    else:
+        return f"{BaseURL}/{url_stub[3:]}"
 
 
 def get_crawl_date(date_str):

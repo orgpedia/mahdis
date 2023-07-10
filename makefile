@@ -10,7 +10,7 @@ sub_tasks := $(foreach s, $(foreach t,$(sub_tasks),subFlows/$t), flow/$s)
 
 
 .PHONY: help install import flow export check readme lint format pre-commit $(tasks) check_env
-.PHONY: trans-install translate trans-export $(sub_tasks)
+.PHONY: trans-install translate $(sub_tasks)
 
 help:
 	$(info Please use 'make <target>', where <target> is one of)
@@ -54,11 +54,13 @@ import/websites/gr.maharashtra.gov.in/Disability:
 
 import/models/ai4bharat/IndicTrans2-en/ct2_int8_model:
 	mkdir -p import/models/ai4bharat/IndicTrans2-en
-	cd import/models/ai4bharat/IndicTrans2-en/ && ln -s $(MODELS_DIR)/ct2_int8_model .
+	cd import/models/ai4bharat/IndicTrans2-en/ && ln -sf $(MODELS_DIR)/ct2_int8_model .
 
 import: check_env import/websites/gr.maharashtra.gov.in/Disability .secrets/google.token 
 	poetry run python import/src/build_documents.py import/websites/gr.maharashtra.gov.in/Disability import/documents
 	poetry run python flow/src/link_new.py import/documents flow/writeTxt_/input
+	cd flow/writeTxt_/conf && ln -sf ../../subFlows/translate_/output/doc_translations.json .
+	cd flow/subFlows/translate_/input && ln -sf ../../../writeTxt_/output/doc_translations_todo.json .
 
 flow: $(tasks)
 $(tasks):
@@ -68,15 +70,16 @@ trans-install: import/models/ai4bharat/IndicTrans2-en/ct2_int8_model
 	poetry lock
 	poetry install --only=translate
 
-
-
 translate: $(sub_tasks)
 $(sub_tasks):
 	poetry run make -C $@
 
+<<<<<<< before updating
 trans-export: 
 	poetry run make -C flow/subFlows/translate_ compress
 
+=======
+>>>>>>> after updating
 check:
 	poetry run op check
 
@@ -91,8 +94,8 @@ format:
 	poetry run black -q .
 	poetry run ruff --fix .
 
-export: format lint
-	poetry run make -C flow/writeTxt_ compress
+export: 
+	$(info "Nothing for now")
 	# git add .
 	# git commit
 
