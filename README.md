@@ -16,6 +16,13 @@ All the data is available in the (flow/writeTxt_/output/) folder and it contains
 The data is currently not relased through PyPI once advanced informaion is extracted the data will be released on PyPI.
 
 
+## Data Details
+- **First Order:** [202301041906309635.pdf](https://gr.maharashtra.gov.in/Site/Upload/Government%20Resolutions/English/202301041906309635.pdf) (04 January 2023)
+- **Last Order:** [202306261553520535.pdf](https://gr.maharashtra.gov.in/Site/Upload/Government%20Resolutions/English/202306261553520535.pdf) (26 June 2023)
+- **Last Crawl Date:** 09-Jul-2023
+- **Total Orders:** 17
+- **Translated Orders:** 17
+
 ## Data Processing
 This is a data package repository - it contains all both the pipeline for generating data and the data generated. In a sense it is different from code repositories that only contain code and not the artifacts the code generates.
 
