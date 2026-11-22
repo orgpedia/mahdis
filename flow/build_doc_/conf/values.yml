@@ -1,0 +1,29 @@
+# Written by `mahdept values` from department.yml (make does it before every docflow command): never edit it here.
+# flow.yml puts these in for ${name} when it loads (orgpedia/doc specs/docflow.md §P4a).
+data:
+  profiles: mh_gr-1
+  registry: empty
+  memory: empty
+profiles: mh_gr-1
+masthead_names: दिव्यांग\s*कल्याण\s*विभाग
+masthead_words: दिव्यांग
+max_pages: 20
+ocr: indic
+department:
+  code: mahdis
+  kind: department
+  names:
+    en: Persons with Disabilities Welfare Department
+  masthead:
+    names:
+    - दिव्यांग कल्याण विभाग
+  max_pages: 20
+  cloud_vision_budget: 0.75
+  ocr: indic
+  set_aside:
+    rules: []
+  shared_lists: LFS/mahGRs/flow/mahdis/common
+  data:
+    profiles: mh_gr-1
+    registry: empty
+    memory: empty
